@@ -33,13 +33,13 @@
     <input type="text" name="email">
     <br>
     date of birth
-    <input type="date" name="date_of_birth">
+    <input type="date" name="date_of_birth" value="01-10-2003">
     <br>
     password
-    <input type="password" name="password">
+    <input type="password" name="password" value="1234">
     <br>
     password confirmation
-    <input type="password" name="password_confirmed">
+    <input type="password" name="password_confirmed" value="123">
     <br>
     <button type="submit">Register</button>
 </form>
