@@ -11,7 +11,7 @@ class UserAuthenticateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UserAuthenticateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => [
+                'bail',
+                'unique:App\Models\User,email',
+                'string',
+                'max:255',
+            ],
         ];
     }
 }

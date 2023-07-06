@@ -15,12 +15,16 @@ class LoginController extends Controller
 {
     public function login(): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        return view('auth.login');
+        return view('auth.login', [
+            'title' => "Login",
+        ]);
     }
 
     public function register(): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'title' => "Register",
+        ]);
     }
 
     public function authenticate(UserAuthenticateRequest $request): RedirectResponse

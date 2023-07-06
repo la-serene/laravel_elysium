@@ -11,7 +11,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,59 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'username' => [
+                'bail',
+                'unique:App\Models\User,username',
+                'string',
+                'max:20',
+                'required',
+
+            ],
+            'first_name' => [
+                'bail',
+                'string',
+                'required',
+            ],
+            'last_name' => [
+                'bail',
+                'string',
+                'required',
+            ],
+            'phone_number' => [
+                'bail',
+                'string',
+                'max:11',
+                'min:10',
+                'required',
+            ],
+            'address' => [
+                'bail',
+                'string',
+            ],
+            'date_of_birth' => [
+                'bail',
+                'required',
+                'date',
+                'before:today',
+            ],
+            'email' => [
+                'bail',
+                'required',
+                'string',
+                'unique:App\Models\User,email'
+            ],
+            'password' => [
+                'bail',
+                'required',
+                'string',
+                'min:4',
+                'confirmed',
+            ],
+            'gender' => [
+                'bail',
+                'required',
+                'boolean',
+            ]
         ];
     }
 }
