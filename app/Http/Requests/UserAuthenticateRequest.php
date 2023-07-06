@@ -24,7 +24,6 @@ class UserAuthenticateRequest extends FormRequest
         return [
             'email' => [
                 'bail',
-                'unique:App\Models\User,email',
                 'string',
                 'max:255',
             ],

@@ -28,7 +28,6 @@ class UserStoreRequest extends FormRequest
                 'string',
                 'max:20',
                 'required',
-
             ],
             'first_name' => [
                 'bail',
@@ -72,7 +71,6 @@ class UserStoreRequest extends FormRequest
             ],
             'gender' => [
                 'bail',
-                'required',
                 'boolean',
             ]
         ];

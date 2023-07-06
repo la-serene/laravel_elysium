@@ -30,11 +30,11 @@ class LoginController extends Controller
     public function authenticate(UserAuthenticateRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
-
+        dd($credentials);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            return redirect()->route('welcome');
         }
 
         return back()->onlyInput('email');
@@ -43,8 +43,8 @@ class LoginController extends Controller
     public function store(UserStoreRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
-        User::create($credentials);
+        $user = User::create($credentials);
 
-        return redirect()->route('auth.login');
+        return redirect()->route('login');
     }
 }

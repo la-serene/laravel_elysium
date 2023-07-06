@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::name('welcome')
+    ->get('/', function () {
     return view('welcome');
 });
 
 Route::controller(LoginController::class)
-    ->middleware('web')
     ->group(function () {
        Route::get('/login', 'login')->name('login');
        Route::get('/register', 'register')->name('register');
         Route::post('/authenticate', 'authenticate')->name('authenticate');
         Route::post('/store', 'store')->name('store');
     });
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

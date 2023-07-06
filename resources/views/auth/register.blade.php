@@ -8,7 +8,17 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-<form action="{{ route('register') }}" method="POST">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form action="{{ route('store') }}" method="POST">
+    @csrf
     username
     <br>
     <input type="text" name="username" value="ky">
@@ -39,7 +49,7 @@
     <input type="password" name="password" value="1234">
     <br>
     password confirmation
-    <input type="password" name="password_confirmed" value="123">
+    <input type="password" name="password_confirmation" value="1234">
     <br>
     <button type="submit">Register</button>
 </form>
