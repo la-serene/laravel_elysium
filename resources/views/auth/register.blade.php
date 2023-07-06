@@ -11,26 +11,26 @@
 <form action="{{ route('register') }}" method="POST">
     username
     <br>
-    <input type="text" name="username">
+    <input type="text" name="username" value="ky">
     <br>
     first name
-    <input type="text" name="first_name">
+    <input type="text" name="first_name" value="ky">
     <br>
     <br>
     last name
-    <input type="text" name="last_name">
+    <input type="text" name="last_name" value="ky">
     <br>
     <br>
     tel
-    <input type="text" name="phone_number">
+    <input type="text" name="phone_number" value="0325454125">
     <br>
     <br>
     address
-    <input type="text" name="address">
+    <input type="text" name="address" value="dasfghsdfg">
     <br>
     <br>
     email
-    <input type="text" name="email">
+    <input type="text" name="email" value="caoky2003xx@gmail.com">
     <br>
     date of birth
     <input type="date" name="date_of_birth" value="01-10-2003">
