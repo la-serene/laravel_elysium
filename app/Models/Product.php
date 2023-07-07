@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    private function getDiscountedPrice(): float|int
+    {
+        return $this->getAttribute('price') * $this->getAttribute('discount') * 1000;
+    }
 }
