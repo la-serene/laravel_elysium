@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('welcome')
-    ->get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -25,6 +24,7 @@ Route::controller(LoginController::class)
        Route::get('/register', 'register')->name('register');
         Route::post('/authenticate', 'authenticate')->name('authenticate');
         Route::post('/store', 'store')->name('store');
+        Route::get('/', 'welcome')->name('welcome');
     });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

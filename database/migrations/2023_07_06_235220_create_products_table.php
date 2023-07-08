@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('discount');
             $table->string('size_id');
             $table->string('color_id');
+            $table->string('description');
             $table->timestamps();
         });
     }

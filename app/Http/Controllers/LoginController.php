@@ -27,10 +27,14 @@ class LoginController extends Controller
         ]);
     }
 
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
     public function authenticate(UserAuthenticateRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
-        dd($credentials);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
