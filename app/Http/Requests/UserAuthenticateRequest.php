@@ -27,6 +27,10 @@ class UserAuthenticateRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'password' => [
+                'bail',
+                'string',
+            ]
         ];
     }
 }
