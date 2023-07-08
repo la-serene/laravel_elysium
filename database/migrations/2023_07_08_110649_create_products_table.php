@@ -13,6 +13,8 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id');
+            $table->decimal('price', 8, 2);
+            $table->decimal('discount', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

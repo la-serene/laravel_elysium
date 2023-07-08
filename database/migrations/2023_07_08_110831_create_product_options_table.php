@@ -13,12 +13,8 @@ class CreateProductOptionsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('color');
             $table->string('size');
-            $table->decimal('price', 8, 2);
             $table->integer('stock');
-            $table->integer('sales');
-            $table->dateTime('create_date');
-            $table->dateTime('update_date')->nullable();
-            $table->decimal('discount', 8, 2)->nullable();
+            $table->integer('sales');            
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
