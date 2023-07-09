@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('total_sales')->default(0);
             $table->integer('total_stock')->default(0);
             $table->integer('discount')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
