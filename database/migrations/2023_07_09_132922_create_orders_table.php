@@ -13,6 +13,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('total_price', 8, 2)->default(0); // Set default value to 0
+            $table->enum('state', ['pending', 'confirmed', 'shipping', 'success', 'canceled'])->default('pending');
             $table->timestamps();
         });
     }
