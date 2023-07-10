@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="css/vendor.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
   <link rel="stylesheet" type="text/css" href="style.css">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Marcellus&display=swap" rel="stylesheet">
@@ -118,7 +118,7 @@
       </form>
 
       <h5 class="cat-list-title">Browse Categories</h5>
-      
+
       <ul class="cat-list">
         <li class="cat-list-item">
           <a href="#" title="Jackets">Jackets</a>
@@ -194,7 +194,7 @@
       <div class="row justify-content-between w-100">
 
         <div class="col-auto">
-          <a class="navbar-brand" href="index.html"><img src="images/main-logo.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.blade.php"><img src="images/main-logo.png" alt="logo"></a>
         </div>
 
         <div class="col-auto">
@@ -216,7 +216,7 @@
                   aria-haspopup="true" aria-expanded="false">Home</a>
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a>
+                      <a href="index.blade.php" class="dropdown-item item-anchor">Home Layout 1</a>
                     </li>
                     <li>
                       <a href="home2.html" class="dropdown-item item-anchor">Home Layout 2</a>
@@ -243,7 +243,7 @@
                       <a href="shop-three-column-wide.html" class="dropdown-item item-anchor">Shop Three Column Wide</a>
                     </li>
                     <li>
-                      <a href="shop-four-column.html" class="dropdown-item item-anchor">Shop Four Column</a>
+                      <a href="shop-four-column.blade.php" class="dropdown-item item-anchor">Shop Four Column</a>
                     </li>
                     <li>
                       <a href="shop-four-column-wide.html" class="dropdown-item item-anchor">Shop Four Column Wide</a>
@@ -282,7 +282,7 @@
                       <a href="blog-right-sidebar.html" class="dropdown-item item-anchor">Blog Right Sidebar</a>
                     </li>
                     <li>
-                      <a href="single-post.html" class="dropdown-item item-anchor">Single Post</a>
+                      <a href="single-post.blade.php" class="dropdown-item item-anchor">Single Post</a>
                     </li>
                     <li>
                       <a href="single-post-no-sidebar.html" class="dropdown-item item-anchor">Single Post No Sidebar</a>
@@ -566,7 +566,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="instagram py-5">
     <div class="container">
       <div class="row g-3">
@@ -616,14 +616,14 @@
       </div>
     </div>
   </section>
-  
+
   <footer id="footer" class="mt-5">
     <div class="container">
       <div class="row d-flex flex-wrap justify-content-between py-5">
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-001">
             <div class="footer-intro mb-4">
-              <a href="index.html">
+              <a href="index.blade.php">
                 <img src="images/main-logo.png" alt="logo">
               </a>
             </div>
@@ -664,7 +664,7 @@
             <h5 class="widget-title text-uppercase mb-4">Quick Links</h5>
             <ul class="menu-list list-unstyled text-uppercase border-animation-left fs-6">
               <li class="menu-item">
-                <a href="index.html" class="item-anchor">Home</a>
+                <a href="index.blade.php" class="item-anchor">Home</a>
               </li>
               <li class="menu-item">
                 <a href="shop-four-column-wide.html" class="item-anchor">About</a>

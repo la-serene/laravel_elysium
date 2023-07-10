@@ -246,7 +246,7 @@
                       <a href="shop-three-column-wide.html" class="dropdown-item item-anchor">Shop Three Column Wide</a>
                     </li>
                     <li>
-                      <a href="shop-four-column.html" class="dropdown-item item-anchor">Shop Four Column</a>
+                      <a href="shop-four-column.blade.php" class="dropdown-item item-anchor">Shop Four Column</a>
                     </li>
                     <li>
                       <a href="shop-four-column-wide.html" class="dropdown-item item-anchor">Shop Four Column Wide</a>
@@ -285,7 +285,7 @@
                       <a href="blog-right-sidebar.html" class="dropdown-item item-anchor">Blog Right Sidebar</a>
                     </li>
                     <li>
-                      <a href="single-post.html" class="dropdown-item item-anchor">Single Post</a>
+                      <a href="single-post.blade.php" class="dropdown-item item-anchor">Single Post</a>
                     </li>
                     <li>
                       <a href="single-post-no-sidebar.html" class="dropdown-item item-anchor">Single Post No Sidebar</a>
@@ -1010,7 +1010,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image1.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1020,7 +1020,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">How to look outstanding in pastel</a>
+                <a href="single-post.blade.php">How to look outstanding in pastel</a>
               </h5>
               <p>Dignissim lacus,turpis ut suspendisse vel tellus.Turpis purus,gravida orci,fringilla...</p>
             </div>
@@ -1029,7 +1029,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image2.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1039,7 +1039,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">Top 10 fashion trend for summer</a>
+                <a href="single-post.blade.php">Top 10 fashion trend for summer</a>
               </h5>
               <p>Turpis purus, gravida orci, fringilla dignissim lacus, turpis ut suspendisse vel tellus...</p>
             </div>
@@ -1048,7 +1048,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image3.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1058,7 +1058,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">Crazy fashion with unique moment</a>
+                <a href="single-post.blade.php">Crazy fashion with unique moment</a>
               </h5>
               <p>Turpis purus, gravida orci, fringilla dignissim lacus, turpis ut suspendisse vel tellus...</p>
             </div>

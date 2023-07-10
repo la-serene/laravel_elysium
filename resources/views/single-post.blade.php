@@ -194,7 +194,7 @@
       <div class="row justify-content-between w-100">
 
         <div class="col-auto">
-          <a class="navbar-brand" href="index.html"><img src="images/main-logo.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.blade.php"><img src="images/main-logo.png" alt="logo"></a>
         </div>
 
         <div class="col-auto">
@@ -216,7 +216,7 @@
                   aria-haspopup="true" aria-expanded="false">Home</a>
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a>
+                      <a href="index.blade.php" class="dropdown-item item-anchor">Home Layout 1</a>
                     </li>
                     <li>
                       <a href="home2.html" class="dropdown-item item-anchor">Home Layout 2</a>
@@ -243,7 +243,7 @@
                       <a href="shop-three-column-wide.html" class="dropdown-item item-anchor">Shop Three Column Wide</a>
                     </li>
                     <li>
-                      <a href="shop-four-column.html" class="dropdown-item item-anchor">Shop Four Column</a>
+                      <a href="shop-four-column.blade.php" class="dropdown-item item-anchor">Shop Four Column</a>
                     </li>
                     <li>
                       <a href="shop-four-column-wide.html" class="dropdown-item item-anchor">Shop Four Column Wide</a>
@@ -864,7 +864,7 @@
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-001">
             <div class="footer-intro mb-4">
-              <a href="index.html">
+              <a href="index.blade.php">
                 <img src="images/main-logo.png" alt="logo">
               </a>
             </div>
@@ -905,7 +905,7 @@
             <h5 class="widget-title text-uppercase mb-4">Quick Links</h5>
             <ul class="menu-list list-unstyled text-uppercase border-animation-left fs-6">
               <li class="menu-item">
-                <a href="index.html" class="item-anchor">Home</a>
+                <a href="index.blade.php" class="item-anchor">Home</a>
               </li>
               <li class="menu-item">
                 <a href="shop-four-column-wide.html" class="item-anchor">About</a>
