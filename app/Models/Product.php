@@ -8,9 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'category_id',
+        'subcategory_id',
+        'price',
+        'discount',
+    ];
 
-    private function getDiscountedPrice(): float|int
+    public function category()
     {
-        return $this->getAttribute('price') * $this->getAttribute('discount') * 1000;
+        return $this->belongsTo(Category::class);
     }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
+    }
+
+    public function productOptions()
+    {
+        return $this->hasMany(ProductOption::class);
+    }
+
+    
 }

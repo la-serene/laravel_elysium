@@ -466,7 +466,7 @@
       <div class="container-fluid">
         <div class="row justify-content-between w-100">
           <div class="col-auto">
-            <a class="navbar-brand" href="index.html"
+            <a class="navbar-brand" href="index.blade.php"
               ><img src="images/main-logo.png" alt="logo"
             /></a>
           </div>
@@ -517,7 +517,7 @@
                       aria-labelledby="dropdownHome"
                     >
                       <li>
-                        <a href="index.html" class="dropdown-item item-anchor"
+                        <a href="index.blade.php" class="dropdown-item item-anchor"
                           >Home Layout 1</a
                         >
                       </li>
@@ -668,7 +668,7 @@
                       </li>
                       <li>
                         <a
-                          href="single-post.html"
+                          href="single-post.blade.php"
                           class="dropdown-item item-anchor"
                           >Single Post</a
                         >
@@ -721,7 +721,7 @@
                         >
                       </li>
                       <li>
-                        <a href="contact.html" class="dropdown-item item-anchor"
+                        <a href="contact.blade.php" class="dropdown-item item-anchor"
                           >Contact</a
                         >
                       </li>
@@ -1412,7 +1412,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="footer-menu footer-menu-001">
               <div class="footer-intro mb-4">
-                <a href="index.html">
+                <a href="index.blade.php">
                   <img src="images/main-logo.png" alt="logo" />
                 </a>
               </div>
@@ -1469,7 +1469,7 @@
                 class="menu-list list-unstyled text-uppercase border-animation-left fs-6"
               >
                 <li class="menu-item">
-                  <a href="index.html" class="item-anchor">Home</a>
+                  <a href="index.blade.php" class="item-anchor">Home</a>
                 </li>
                 <li class="menu-item">
                   <a href="shop-four-column-wide.html" class="item-anchor"

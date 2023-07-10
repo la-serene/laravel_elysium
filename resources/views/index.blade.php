@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/vendor.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
   <link rel="stylesheet" type="text/css" href="style.css">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Marcellus&display=swap" rel="stylesheet">
@@ -117,7 +117,7 @@
       </form>
 
       <h5 class="cat-list-title">Browse Categories</h5>
-      
+
       <ul class="cat-list">
         <li class="cat-list-item">
           <a href="#" title="Jackets">Jackets</a>
@@ -246,7 +246,7 @@
                       <a href="shop-three-column-wide.html" class="dropdown-item item-anchor">Shop Three Column Wide</a>
                     </li>
                     <li>
-                      <a href="shop-four-column.html" class="dropdown-item item-anchor">Shop Four Column</a>
+                      <a href="shop-four-column.blade.php" class="dropdown-item item-anchor">Shop Four Column</a>
                     </li>
                     <li>
                       <a href="shop-four-column-wide.html" class="dropdown-item item-anchor">Shop Four Column Wide</a>
@@ -285,7 +285,7 @@
                       <a href="blog-right-sidebar.html" class="dropdown-item item-anchor">Blog Right Sidebar</a>
                     </li>
                     <li>
-                      <a href="single-post.html" class="dropdown-item item-anchor">Single Post</a>
+                      <a href="single-post.blade.php" class="dropdown-item item-anchor">Single Post</a>
                     </li>
                     <li>
                       <a href="single-post-no-sidebar.html" class="dropdown-item item-anchor">Single Post No Sidebar</a>
@@ -309,7 +309,7 @@
                       <a href="coming-soon.html" class="dropdown-item item-anchor">Coming Soon</a>
                     </li>
                     <li>
-                      <a href="contact.html" class="dropdown-item item-anchor">Contact</a>
+                      <a href="contact.blade.php" class="dropdown-item item-anchor">Contact</a>
                     </li>
                     <li>
                       <a href="error-page.html" class="dropdown-item item-anchor">Error Page</a>
@@ -366,7 +366,7 @@
             </li>
           </ul>
         </div>
-      
+
       </div>
 
     </div>
@@ -583,9 +583,9 @@
 
   <section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3"> 
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">Our New Arrivals</h4>
-        <a href="shop-sidebar.html" class="btn-link">View All Products</a>  
+        <a href="shop-sidebar.html" class="btn-link">View All Products</a>
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
@@ -686,7 +686,7 @@
       <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24"><use xlink:href="#arrow-right"></use></svg></div>
     </div>
   </section>
-  
+
   <section class="collection bg-light position-relative py-5">
     <div class="container">
       <div class="row">
@@ -711,9 +711,9 @@
 
   <section id="best-sellers" class="best-sellers product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3"> 
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">Best Selling Items</h4>
-        <a href="shop-sidebar.html" class="btn-link">View All Products</a>  
+        <a href="shop-sidebar.html" class="btn-link">View All Products</a>
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
@@ -896,7 +896,7 @@
 
   <section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3"> 
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
           <h4 class="text-uppercase">You May Also Like</h4>
           <a href="shop-sidebar.html" class="btn-link">View All Products</a>
       </div>
@@ -999,10 +999,10 @@
       <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24"><use xlink:href="#arrow-right"></use></svg></div>
     </div>
   </section>
-  
+
   <section class="blog py-5">
-    <div class="container">        
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3"> 
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">Read Blog Posts</h4>
         <a href="blog-classic.html" class="btn-link">View All</a>
       </div>
@@ -1010,7 +1010,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image1.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1020,7 +1020,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">How to look outstanding in pastel</a>
+                <a href="single-post.blade.php">How to look outstanding in pastel</a>
               </h5>
               <p>Dignissim lacus,turpis ut suspendisse vel tellus.Turpis purus,gravida orci,fringilla...</p>
             </div>
@@ -1029,7 +1029,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image2.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1039,7 +1039,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">Top 10 fashion trend for summer</a>
+                <a href="single-post.blade.php">Top 10 fashion trend for summer</a>
               </h5>
               <p>Turpis purus, gravida orci, fringilla dignissim lacus, turpis ut suspendisse vel tellus...</p>
             </div>
@@ -1048,7 +1048,7 @@
         <div class="col-md-4">
           <article class="post-item">
             <div class="post-image">
-              <a href="single-post.html">
+              <a href="single-post.blade.php">
                 <img src="images/post-image3.jpg" alt="image" class="post-grid-image img-fluid">
               </a>
             </div>
@@ -1058,7 +1058,7 @@
                 <span class="meta-day"> jul 11, 2022</span>
               </div>
               <h5 class="post-title text-uppercase">
-                <a href="single-post.html">Crazy fashion with unique moment</a>
+                <a href="single-post.blade.php">Crazy fashion with unique moment</a>
               </h5>
               <p>Turpis purus, gravida orci, fringilla dignissim lacus, turpis ut suspendisse vel tellus...</p>
             </div>
@@ -1067,7 +1067,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="logo-bar py-5">
     <div class="container">
       <div class="row">
@@ -1081,7 +1081,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="newsletter bg-light" style="background: url(images/pattern-bg.png) no-repeat;">
     <div class="container">
       <div class="row justify-content-center">
@@ -1097,7 +1097,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="instagram py-5">
     <div class="container">
       <div class="row g-3">
@@ -1147,7 +1147,7 @@
       </div>
     </div>
   </section>
-  
+
   <footer id="footer" class="mt-5">
     <div class="container">
       <div class="row d-flex flex-wrap justify-content-between py-5">
