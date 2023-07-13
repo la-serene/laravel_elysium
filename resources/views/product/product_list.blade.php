@@ -823,3 +823,11 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $('header').addClass('header-v4');
+            console.log('1');
+        });
+    </script>
+@endpush
