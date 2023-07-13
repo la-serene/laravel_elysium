@@ -8,11 +8,19 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class LoginController extends Controller
 {
+    public function welcome(): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        return view("index", [
+            'title' => "Elysium",
+        ]);
+    }
     public function login(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         return view('auth.login', [
@@ -25,11 +33,6 @@ class LoginController extends Controller
         return view('auth.register', [
             'title' => "Register",
         ]);
-    }
-
-    public function welcome(): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        return view('welcome');
     }
 
     public function authenticate(AuthenticateUserRequest $request): RedirectResponse
@@ -47,7 +50,7 @@ class LoginController extends Controller
     public function store(StoreUserRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
-        $user = User::create($credentials);
+        User::create($credentials);
 
         return redirect()->route('login');
     }
