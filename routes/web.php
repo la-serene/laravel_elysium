@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +25,16 @@ Route::controller(LoginController::class)
         Route::get('/', 'welcome')->name('welcome');
     });
 
-Route::controller(\App\Http\Controllers\UserController::class)
+Route::controller(UserController::class)
     ->prefix('/user')
     ->name('user.')
     ->group(function () {
         Route::get('/logout', 'logout')->name('logout');
+    });
+
+Route::controller(\App\Http\Controllers\ProductController::class)
+    ->prefix('/product')
+    ->name('product.')
+    ->group(function () {
+       Route::get('/', 'index')->name('index');
     });

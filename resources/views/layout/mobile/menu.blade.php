@@ -41,7 +41,7 @@
         </li>
 
         <li>
-            <a href="product.html">Shop</a>
+            <a href="{{ route("product.index") }}">Shop</a>
         </li>
 
         <li>

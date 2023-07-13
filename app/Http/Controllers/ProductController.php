@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('product.product_list', [
+            'title' => "Shopping",
+        ]);
     }
 
     /**
