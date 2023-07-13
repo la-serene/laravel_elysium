@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +33,10 @@ Route::controller(UserController::class)
         Route::get('/logout', 'logout')->name('logout');
     });
 
-Route::controller(\App\Http\Controllers\ProductController::class)
+Route::controller(ProductController::class)
     ->prefix('/product')
     ->name('product.')
     ->group(function () {
        Route::get('/', 'index')->name('index');
+       Route::get('/{id}', 'show')->name('show');
     });
