@@ -38,7 +38,8 @@
 								</span>
                             </div>
 
-                            <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
+                            <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn"
+                                 data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
                                     Jackets & Coats
                                 </h2>
@@ -57,13 +58,15 @@
                 <div class="item-slick1" style="background-image: url({{ asset("images/slide-03.jpg") }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
+                            <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft"
+                                 data-delay="0">
 								<span class="ltext-101 cl2 respon2">
 									Men Collection 2018
 								</span>
                             </div>
 
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
+                            <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight"
+                                 data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
                                     New arrivals
                                 </h2>
@@ -204,7 +207,8 @@
                 </div>
 
                 <div class="flex-w flex-c-m m-tb-10">
-                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                    <div
+                        class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
                         <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                         <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                         Filter
