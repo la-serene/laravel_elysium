@@ -1,0 +1,1 @@
+<h1>Product ID: {{ $user }}</h1>

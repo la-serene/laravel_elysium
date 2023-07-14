@@ -28,4 +28,14 @@ class Product extends Model
     {
         return $this->hasMany(ProductOption::class);
     }
+    public function orderDetails()
+    {
+    return $this->hasMany(OrderDetail::class);
+    }
+
+    public function getDiscountedPrice()
+    {
+    $discountedPrice = $this->price - ($this->price * ($this->discount / 100));
+    return $discountedPrice;
+    }
 }
