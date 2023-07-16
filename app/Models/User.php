@@ -26,6 +26,9 @@ class User extends Authenticatable
         'date_of_birth',
         'email',
         'password',
+        'city_id'.
+        'district_id',
+        'avatar'
     ];
 
     /**
@@ -47,4 +50,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Get the district associated with the product.
+     */
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
 }
