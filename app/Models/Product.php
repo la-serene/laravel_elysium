@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -28,14 +27,31 @@ class Product extends Model
     {
         return $this->hasMany(ProductOption::class);
     }
+
     public function orderDetails()
     {
-    return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class);
     }
-
     public function getDiscountedPrice()
     {
-    $discountedPrice = $this->price - ($this->price * ($this->discount / 100));
-    return $discountedPrice;
+        if ($this->discount) {
+            $discountedPrice = $this->price - ($this->price * $this->discount / 100);
+            return round($discountedPrice, 2);
+        }
+        
+        return $this->price;
     }
+    public function averageRating()
+    {
+        $totalRatings = $this->orderDetails()->whereNotNull('rating')->count();
+        
+        if ($totalRatings > 0) {
+            $totalSumOfRatings = $this->orderDetails()->whereNotNull('rating')->sum('rating');
+            $averageRating = $totalSumOfRatings / $totalRatings;
+            return round($averageRating, 2);
+        }
+        
+        return 0;
+    }
+
 }
