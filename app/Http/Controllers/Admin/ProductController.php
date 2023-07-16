@@ -89,8 +89,34 @@ class ProductController extends Controller
 
     public function createPost(Request $request)
     {
+        // Validate the request data
+        $request->validate([
+            // Add validation rules for other fields if necessary
+            'product_colors' => 'required|array',
+            'product_sizes' => 'required|array',
+            'product_colors.*' => 'exists:colors,id',
+            'product_sizes.*' => 'exists:sizes,id',
+            'stock' => 'required|array',
+            'stock.*.*' => 'integer|min:0',
+            'mainImage' => 'required',
+            'mainImage.*.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|array',
+            'image.*.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        
+        $mainImage = $request->file('mainImage');
+        $mainImagePath = null;
+        if ($mainImage) {
+            $fomartedMainImageName = request('productTitle');
+            $fomartedMainImageName = strtolower($fomartedMainImageName); // Chuyển đổi thành chữ thường
+            $fomartedMainImageName = preg_replace('/[^a-z0-9]+/', '-', $fomartedMainImageName); // Loại bỏ các ký tự không phải chữ cái và số, thay thế bằng dấu gạch ngang
+            $fomartedMainImageName = trim($fomartedMainImageName, '-'); // Loại bỏ dấu gạch ngang từ đầu và cuối chuỗi
 
-        dd($request);
+            $mainImageName = $$fomartedMainImageName . '_'.'main' . $mainImage->getClientOriginalExtension();
+            $mainImage->move(public_path('img'), $mainImageName);
+            $mainImagePath = 'img/' . $mainImageName;
+        }
+        // Create the product
         $productData = [
             'title' => request('productTitle'),
             'category_id' => request('category_id'),
@@ -99,50 +125,54 @@ class ProductController extends Controller
             'price' => request('product_price'),
             'discount' => request('product_discount'),
             'description' => request('productDescription'),
+            'image' => $mainImagePath,
+            'created_at' => time()
         ];
+
     
         $product = Product::create($productData);
     
+        // Create the product options
         $productOptionsData = [];
         $colors = request('product_colors');
         $sizes = request('product_sizes');
-
-        dd($request->file('images'));
-
-        
-        if ($request->hasFile('images')) {
-            $imagePaths = [];
     
-            foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('img'), $imageName);
-                $imagePaths[] = $imageName;
-            }
-    
-            $productData['images'] = $imagePaths;
-            $product->update($productData);
-        }
-        
-        // Tạo các tùy chọn sản phẩm với mỗi màu sắc và kích cỡ
         foreach ($colors as $color) {
             foreach ($sizes as $size) {
-                $stock = request('stock')[$color][$size] ; // Lấy giá trị stock từ request
-
+                $stock = request('stock')[$color][$size];
+                $image = $request->file('image')[$color][$size];
     
-                $productOptionsData = [
+                // Upload the image
+                $imagePath = null;
+                if ($image) {
+                    $fomartedName = request('productTitle');
+                    $fomartedName = strtolower($fomartedName); // Chuyển đổi thành chữ thường
+                    $fomartedName = preg_replace('/[^a-z0-9]+/', '-', $fomartedName); // Loại bỏ các ký tự không phải chữ cái và số, thay thế bằng dấu gạch ngang
+                    $fomartedName = trim($fomartedName, '-'); // Loại bỏ dấu gạch ngang từ đầu và cuối chuỗi
+
+                    $imageName = $fomartedName . '_' . $color . '_' . $size . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('img'), $imageName);
+                    $imagePath = 'img/' . $imageName;
+                }
+    
+                $productOptionsData[] = [
                     'product_id' => $product->id,
-                    'stock' => $stock, // Số lượng hàng tồn kho
-                    'sales' => 0, // Số lượng hàng đã bán ban đầu
+                    'stock' => $stock,
+                    'sales' => 0,
                     'color_id' => $color,
                     'size_id' => $size,
+                    'image' => $imagePath,
+                    'created_at' => time()
                 ];
-    
-                ProductOption::create($productOptionsData);
             }
         }
+    
+        // Insert the product options in bulk
+        ProductOption::insert($productOptionsData);
     
         return redirect()->back();
     }
+    
     public function delete($id)
     {
         $product = Product::findOrFail($id);

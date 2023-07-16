@@ -5,7 +5,7 @@
 @include('admin.layouts.sidebar')     
 
 
-<form action="{{ route('admin.products.createPost') }}" method="POST">
+<form action="{{ route('admin.products.createPost') }}" method="POST" enctype="multipart/form-data">
           @csrf
         <div class="row">
 
@@ -51,13 +51,17 @@
 
                   <div class="form-group">
                   <label for="inputSubcategory2">Subcategory 2</label>
-                  <select id="inputSubcategory2" class="form-control custom-select" name="subcategory_id2" required>
-                      
+                  <select id="inputSubcategory2" class="form-control custom-select" name="subcategory_id2" required>     
                       @foreach($subcategory2s as $subcategory2)
                           <option value="{{ $subcategory2->id }}">{{ $subcategory2->title }}</option>
                       @endforeach
                   </select>
                   </div>
+                  <div class="form-group">
+                    <label for="inputMainImg">Main Image</label> 
+                      <input type="file" name="mainImg" class="form-control">
+                  </div>
+                  
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -117,21 +121,36 @@
               </div>
               <!-- /.card-body -->
             </div>
-            <div id="stockTableContainer">
-              <table id="stockTable" class="table">
-                  <thead>
-                      <tr>
-                          <th>Color</th>
-                          <th>Size</th>
-                          <th>Color Image</th>
-                          <th>Stock</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <!-- Stock rows will be dynamically added here -->
-                  </tbody>
-              </table>
-          </div>
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Stock</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <div id="stockTableContainer">
+                    <table id="stockTable" class="table">
+                      <thead>
+                          <tr>
+                              <th>Color</th>
+                              <th>Size</th>
+                              <th>Color Image</th>
+                              <th>Stock</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Stock rows will be dynamically added here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
           </div>        
         </div>
@@ -221,49 +240,49 @@ document.getElementById('inputColor').addEventListener('change', function() {
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('.select2').on('change', function() {
+$(document).ready(function() {
+$('.select2').on('change', function() {
 
-          var selectedColors = $('[name="product_colors[]"]').val();
-          var selectedSizes = $('[name="product_sizes[]"]').val();
+    var selectedColors = $('[name="product_colors[]"]').val();
+    var selectedSizes = $('[name="product_sizes[]"]').val();
 
-            var selectedColorOptions = $('select[name="product_colors[]"] option:selected');
-            var selectedColorTitles = [];
+    var selectedColorOptions = $('select[name="product_colors[]"] option:selected');
+    var selectedColorTitles = [];
 
-            // Lặp qua từng option đã chọn và lấy giá trị color->title
-            selectedColorOptions.each(function() {
-              var colorTitle = $(this).text(); // Lấy nội dung của option (color->title)
-              selectedColorTitles.push(colorTitle);
-            });
-            // In ra danh sách các color->title đã được chọn
-            console.log(selectedColorTitles);
-
-
-            var selectedSizeOptions = $('select[name="product_sizes[]"] option:selected');
-            var selectedSizeTitles = [];
-
-            selectedSizeOptions.each(function() {
-              var sizeTitle = $(this).text();
-              selectedSizeTitles.push(sizeTitle);
-            });
-            console.log(selectedSizeTitles);
-
-
-            if (selectedColorTitles && selectedColorTitles.length > 0 && selectedSizeTitles && selectedSizeTitles.length > 0) {
-                $('#stockTable tbody').empty();
-
-                for (var i = 0; i < selectedColorTitles.length; i++) {
-                    for (var j = 0; j < selectedSizeTitles.length; j++) {
-                      var stockRow = $('<tr>');
-                      stockRow.append('<td>' + selectedColorTitles[i] + '</td>');
-                      stockRow.append('<td>' + selectedSizeTitles[j] + '</td>');
-                      stockRow.append('<td><input type="file" name="image[' + selectedColors[i] + '][' + selectedSizes[j] + ']" class="form-control"></td>');
-                      stockRow.append('<td><input type="number" name="stock[' + selectedColors[i] + '][' + selectedSizes[j] + ']" min="0" class="form-control"></td></tr');
-
-                      $('#stockTable tbody').append(stockRow);
-                    }
-                }
-            }
-        });
+    // Lặp qua từng option đã chọn và lấy giá trị color->title
+    selectedColorOptions.each(function() {
+        var colorTitle = $(this).text(); // Lấy nội dung của option (color->title)
+        selectedColorTitles.push(colorTitle);
     });
+    // In ra danh sách các color->title đã được chọn
+    console.log(selectedColorTitles);
+
+
+    var selectedSizeOptions = $('select[name="product_sizes[]"] option:selected');
+    var selectedSizeTitles = [];
+
+    selectedSizeOptions.each(function() {
+        var sizeTitle = $(this).text();
+        selectedSizeTitles.push(sizeTitle);
+    });
+    console.log(selectedSizeTitles);
+
+
+    if (selectedColorTitles && selectedColorTitles.length > 0 && selectedSizeTitles && selectedSizeTitles.length > 0) {
+        $('#stockTable tbody').empty();
+
+        for (var i = 0; i < selectedColorTitles.length; i++) {
+            for (var j = 0; j < selectedSizeTitles.length; j++) {
+                var stockRow = $('<tr>');
+                stockRow.append('<td>' + selectedColorTitles[i] + '</td>');
+                stockRow.append('<td>' + selectedSizeTitles[j] + '</td>');
+                stockRow.append('<td><input type="file" name="image[' + selectedColors[i] + '][' + selectedSizes[j] + ']" class="form-control"></td>');
+                stockRow.append('<td><input type="number" name="stock[' + selectedColors[i] + '][' + selectedSizes[j] + ']" min="0" class="form-control"></td></tr');
+
+                $('#stockTable tbody').append(stockRow);
+            }
+        }
+    }
+});
+});
 </script>
