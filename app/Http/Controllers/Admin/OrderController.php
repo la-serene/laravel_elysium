@@ -13,16 +13,20 @@ class OrderController extends Controller
     {
         $state = $request->query('state');
 
+        $page_title = 'Orders';
+        $tab_title = 'All orders';
         // Retrieve orders based on the state parameter
         if ($state === 'pending') {
             // Retrieve pending orders
             $orders = Order::where('state', 'pending')->get();
+            $tab_title = 'Pending orders';
+            $page_title = 'Pending orders';
         } else {
             $orders = Order::all();
         }
-        
+    
 
-        return new Response(view('admin.orders.index', compact('orders')));
+        return new Response(view('admin.orders.index', ['orders' => $orders, 'page_title' => $page_title, 'tab_title' => $tab_title]));
     }
     public function show($id)
     {

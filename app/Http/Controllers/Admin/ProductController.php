@@ -28,14 +28,18 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $page_title = 'Products';
+        $tab_title = 'All products';
 
-        return new Response(view('admin.products.index', compact('products')));
+        return new Response(view('admin.products.index', ['products' => $products, 'page_title' => $page_title, 'tab_title' => $tab_title]));
     }
     
     public function show($id)
     {
         
         $product = Product::find($id);
+        $page_title = $product->title;
+        $tab_title = $product->title;
 
 
         // Check if the product exists
@@ -58,7 +62,7 @@ class ProductController extends Controller
             $users = null;
         }        
         // Pass the product data to the view
-        return view('admin.products.show', ['product' => $product, 'order_details' => $order_details, 'users' => $users, 'averageRating' => $averageRating]);
+        return view('admin.products.show', ['product' => $product, 'order_details' => $order_details, 'users' => $users, 'averageRating' => $averageRating,'page_title' => $page_title, 'tab_title' => $tab_title]);
     }
     
     public function create()
@@ -69,17 +73,24 @@ class ProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
 
+        $page_title = 'Create new product';
+        $tab_title = 'Create new product';
+
         return view('admin.products.create', [
             'categories' => $categories,
             'subcategory1s' => $subcategory1s,
             'subcategory2s' => $subcategory2s,
             'colors' => $colors,
             'sizes' => $sizes,
+            'page_title' => $page_title, 
+            'tab_title' => $tab_title
         ]);
     }
 
-    public function createPost()
+    public function createPost(Request $request)
     {
+
+        dd($request);
         $productData = [
             'title' => request('productTitle'),
             'category_id' => request('category_id'),
@@ -96,12 +107,31 @@ class ProductController extends Controller
         $colors = request('product_colors');
         $sizes = request('product_sizes');
 
+        dd($request->file('images'));
+
+        
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+    
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('img'), $imageName);
+                $imagePaths[] = $imageName;
+            }
+    
+            $productData['images'] = $imagePaths;
+            $product->update($productData);
+        }
+        
         // Tạo các tùy chọn sản phẩm với mỗi màu sắc và kích cỡ
         foreach ($colors as $color) {
             foreach ($sizes as $size) {
+                $stock = request('stock')[$color][$size] ; // Lấy giá trị stock từ request
+
+    
                 $productOptionsData = [
                     'product_id' => $product->id,
-                    'stock' => 0, // Số lượng hàng tồn kho ban đầu
+                    'stock' => $stock, // Số lượng hàng tồn kho
                     'sales' => 0, // Số lượng hàng đã bán ban đầu
                     'color_id' => $color,
                     'size_id' => $size,
@@ -110,17 +140,9 @@ class ProductController extends Controller
                 ProductOption::create($productOptionsData);
             }
         }
-        // Tạo các tùy chọn sản phẩm
-        
     
-        return response()->json([
-            'message' => 'Sản phẩm và tùy chọn sản phẩm đã được tạo mới thành công.',
-            'color' => $colors,
-            'size' => $sizes,
-
-        ]);
+        return redirect()->back();
     }
-
     public function delete($id)
     {
         $product = Product::findOrFail($id);
@@ -133,6 +155,33 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $product_options = ProductOption::where('product_id', $id)->get();
+
+        if (!$product) {
+            // Handle the case when the product does not exist
+            abort(404);
+        }
+        $categories = Category::all();
+        $subcategory1s = Subcategory1::all();
+        $subcategory2s = Subcategory2::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        // Pass the product data to the view
+        return view('admin.products.edit', [
+            'product' =>   $product,   
+            'categories' => $categories,
+            'subcategory1s' => $subcategory1s,
+            'subcategory2s' => $subcategory2s,
+            'product_options ' => $product_options,
+            'colors' => $colors,
+            'sizes' => $sizes,  
+
+        ]);
+    }
+    public function update($id)
+    {
+        $product = Product::find($id);
 
         if (!$product) {
             // Handle the case when the product does not exist
@@ -142,6 +191,16 @@ class ProductController extends Controller
         // Pass the product data to the view
         return view('admin.products.edit', ['product' => $product]);
     }
+    public function deleteSelected(Request $request)
+    {
+        $selectedProductIds = $request->input('selected_products');
+
+        // Delete the selected products using the provided IDs
+        Product::whereIn('id', $selectedProductIds)->delete();
+
+        return response()->json(['message' => 'Selected products deleted successfully.']);
+    }
+
     
 
     

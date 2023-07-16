@@ -18,6 +18,8 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Address</th>
+                                <th>District</th>
+                                <th>City</th>
                                 <th>Phone Number</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
@@ -26,13 +28,23 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->address }}</td>
-                                <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td>{{ $user->updated_at }}</td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->id }}</a></td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->first_name }} {{ $user->last_name }}</a></td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->email }}</a></td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->address }}</a></td>
+                                <td>
+                                    @if ($user && $user->district)
+                                    <a href="{{ route('admin.users.show', $user->id) }}">{{ $user->district->name }}
+                                    @endif
+                                    </a>
+                                </td>
+                                <td>
+                                    @if ($user && $user->city)
+                                    <a href="{{ route('admin.users.show', $user->id) }}">{{ $user->city->name }}</a>
+                                    @endif</td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->phone_number }}</a></td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->created_at }}</a></td>
+                                <td><a href="{{ route('admin.users.show', $user->id) }}">{{ $user->updated_at }}</a></td>
                             </tr>
                             @endforeach
                         </tbody>

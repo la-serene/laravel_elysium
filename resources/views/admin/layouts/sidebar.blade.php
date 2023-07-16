@@ -1,15 +1,8 @@
-@php
-    use App\Models\Product;
-    use App\Models\Category;
-
-    $categories = Category::all();
-@endphp
- 
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="{{ route('admin.home') }}" class="brand-link">
+      <img src="dist/img/logo.png" alt="logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Azuna.Co</span>
     </a>
 
@@ -21,7 +14,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{Admin name}</a>
         </div>
       </div>
 
@@ -46,7 +39,7 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                {{$page_title}}
               </p>
             </a>
           </li>
@@ -96,15 +89,56 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.sales', ['state' => 'pending']) }}" class="nav-link {{ request()->routeIs('admin.sales') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View all sales</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('admin.products.create') }}" class="nav-link {{ request()->routeIs('admin.products.create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New Products</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                User
+                <i class="fas fa-angle-left right"></i>
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.index') && !request('state') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View all</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.users.create') }}" class="nav-link {{ request()->routeIs('admin.users.create') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New User</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>
+                Category management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View all</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.categories.create') }}" class="nav-link {{ request()->routeIs('admin.categories.create') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New Category</p>
                 </a>
               </li>
             </ul>
@@ -123,12 +157,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">{{$page_title}}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">???</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

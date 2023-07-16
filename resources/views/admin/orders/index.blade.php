@@ -17,6 +17,9 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Total Price</th>
+                                <th>Address</th>
+                                <th>District</th>
+                                <th>City</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>State</th>
@@ -28,22 +31,28 @@
                                 <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->id }}</a></td>
                                 <td>{{ $order->user->name }}</td>
                                 <td>{{ $order->total_price }}</td>
+                                <td>{{ $order->address }}</td>
+                                <td>{{ $order->district->name }}</td>
+                                <td>{{ $order->city->name }}</td>
                                 <td>{{ $order->created_at }}</td>
                                 <td>{{ $order->updated_at }}</td>
-                                <td>{{ $order->state }}</td>
+                                <td>
+                                    @if($order->state === 'pending')
+                                        <button class="btn btn-primary">{{ $order->state }}</button>
+                                    @elseif($order->state === 'confirmed')
+                                        <button class="btn btn-success">{{ $order->state }}</button>
+                                    @elseif($order->state === 'shipping')
+                                        <button class="btn btn-info">{{ $order->state }}</button>
+                                    @elseif($order->state === 'success')
+                                        <button class="btn btn-primary">{{ $order->state }}</button>
+                                    @elseif($order->state === 'canceled')
+                                        <button class="btn btn-danger">{{ $order->state }}</button>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Total Price</th>
-                                <th>State</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
-                            </tr>
-                        </tfoot>
+>
                     </table>
                 </div>
                 <!-- /.card-body -->
