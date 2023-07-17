@@ -54,4 +54,11 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function forget_password(): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        return view('auth.forget_password', [
+            'title' => 'Forget Password'
+        ]);
+    }
 }

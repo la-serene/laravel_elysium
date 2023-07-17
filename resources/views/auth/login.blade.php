@@ -25,7 +25,7 @@
             </label>
             <i class="zmdi zmdi-lock"></i>
         </div>
-        <a href="forget.html" class="forget-password">
+        <a href="{{ route('password.forget') }}" class="forget-password">
             Forget password?
             <i class="zmdi zmdi-arrow-right"></i>
         </a>

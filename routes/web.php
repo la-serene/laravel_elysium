@@ -30,7 +30,7 @@ Route::controller(LoginController::class)
     ->prefix('/password')
     ->name('password.')
     ->group(function () {
-       Route::post('/forget', 'forget_password')->name('forget');
+       Route::get('/forget', 'forget_password')->name('forget');
     });
 
 Route::controller(UserController::class)
