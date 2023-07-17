@@ -8,6 +8,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -16,7 +18,7 @@ class AdminController extends Controller
         return view('admin.pages.login');
     }
 
-    public function loginPost(Request $request)
+    public function loginPost(Request $request): \Illuminate\Foundation\Application|Redirector|RedirectResponse|Application
     {
         $request->validate([
             'email' => 'required',
@@ -25,11 +27,10 @@ class AdminController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('admin.dashboard')
-                ->withSuccess('Signed in');
+            return redirect()->intended('admin.dashboard');
         }
 
-        return redirect("admin.login")->withSuccess('Login details are not valid');
+        return redirect("admin.login");
     }
 
     public function index(): RedirectResponse

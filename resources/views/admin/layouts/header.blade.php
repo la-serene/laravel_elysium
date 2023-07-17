@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
   <!-- Include required CSS files -->
-  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
 
 </head>
