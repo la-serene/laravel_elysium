@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
-            $table->string('product_description');
+            $table->string('product_description')->nullable();
+            #$table->foreign('category_id')->references('id')->on('categories');
+            #$table->foreign('subcategory_id1')->references('id')->on('sub_category1s');
+            #$table->foreign('subcategory_id2')->references('id')->on('sub_category2s');
             $table->decimal('product_price', 8, 2);
-            $table->decimal('rating', 5, 2);
             $table->integer('total_sales')->default(0);
-            $table->integer('in_stock');
+            $table->integer('total_stock')->default(0);
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
     }
