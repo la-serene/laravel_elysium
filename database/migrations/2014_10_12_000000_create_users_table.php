@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('date_of_birth');
             $table->string('email')->unique();
+            $table->string('avatar')->default("https://www.pinterest.com/pin/polite-cat-meme-is-this-viral-image-of--670895675717634661/");
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
