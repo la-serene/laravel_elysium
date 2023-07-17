@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,8 +55,8 @@ Route::prefix('admin')
 
         // Admin Dashboard
         Route::get('/', 'AdminController@index')->name('admin.home');
-        Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-        Route::get('sales', 'AdminController@sales')->name('admin.sales');
+        Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+        Route::get('/sales', 'AdminController@sales')->name('admin.sales');
 
         // Manage Products
         Route::get('products', 'ProductController@index')->name('admin.products.index');
@@ -71,8 +72,8 @@ Route::prefix('admin')
 
         // Manage Orders
         Route::get('orders', 'OrderController@index')->name('admin.orders.index');
-        //Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
-        //Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
+        Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
+        Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
         Route::get('orders/{id}', 'OrderController@show')->name('admin.orders.show');
 
         Route::put('/orders/{order}/update-state', 'OrderController@updateState')->name('admin.orders.updateState');
