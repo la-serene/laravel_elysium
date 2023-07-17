@@ -48,41 +48,42 @@ Route::controller(ProductController::class)
         Route::get('/{id}', 'show')->name('show');
     });
 
-Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+Route::prefix('admin')
+    ->namespace('App\Http\Controllers\Admin')
+    ->group(function () {
+
+        // Admin Dashboard
+        Route::get('/', 'AdminController@index')->name('admin.home');
+        Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+        Route::get('sales', 'AdminController@sales')->name('admin.sales');
+
+        // Manage Products
+        Route::get('products', 'ProductController@index')->name('admin.products.index');
+        Route::get('products/create', 'ProductController@create')->name('admin.products.create');
+        Route::post('products/create', 'ProductController@createPost')->name('admin.products.createPost');
+        Route::delete('products/{id}', 'ProductController@delete')->name('admin.products.delete');
+        Route::get('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
+        Route::put('products/{id}', 'ProductController@update')->name('admin.products.update');
+        Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
+        Route::post('/admin/products/delete-selected',
+            'ProductController@deleteSelected')->name('admin.products.deleteSelected');
 
 
-    // Admin Dashboard
-    Route::get('/', 'AdminController@index')->name('admin.home');
-    Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-    Route::get('sales', 'AdminController@sales')->name('admin.sales');
+        // Manage Orders
+        Route::get('orders', 'OrderController@index')->name('admin.orders.index');
+        //Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
+        //Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
+        Route::get('orders/{id}', 'OrderController@show')->name('admin.orders.show');
 
-    // Manage Products
-    Route::get('products', 'ProductController@index')->name('admin.products.index');
-    Route::get('products/create', 'ProductController@create')->name('admin.products.create');
-    Route::post('products/create', 'ProductController@createPost')->name('admin.products.createPost');
-    Route::delete('products/{id}', 'ProductController@delete')->name('admin.products.delete');
-    Route::get('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
-    Route::put('products/{id}', 'ProductController@update')->name('admin.products.update');
-    Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
-    Route::post('/admin/products/delete-selected',
-        'ProductController@deleteSelected')->name('admin.products.deleteSelected');
+        Route::put('/orders/{order}/update-state', 'OrderController@updateState')->name('admin.orders.updateState');
 
 
-    // Manage Orders
-    Route::get('orders', 'OrderController@index')->name('admin.orders.index');
-    //Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
-    //Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
-    Route::get('orders/{id}', 'OrderController@show')->name('admin.orders.show');
-
-    Route::put('/orders/{order}/update-state', 'OrderController@updateState')->name('admin.orders.updateState');
-
-
-    // Manage Users
-    Route::get('users', 'UserController@index')->name('admin.users.index');
-    Route::get('users/create', 'UserController@create')->name('admin.users.create');
-    Route::post('users/create', 'UserController@createPost')->name('admin.users.createPost');
-    Route::delete('users/{id}', 'UserController@delete')->name('admin.users.delete');
-    Route::put('users/{id}/edit', 'UserController@edit')->name('admin.users.edit');
-    Route::put('users/{id}', 'UserController@update')->name('admin.users.update');
-    Route::get('users/{id}', 'UserController@show')->name('admin.users.show');
-});
+        // Manage Users
+        Route::get('users', 'UserController@index')->name('admin.users.index');
+        Route::get('users/create', 'UserController@create')->name('admin.users.create');
+        Route::post('users/create', 'UserController@createPost')->name('admin.users.createPost');
+        Route::delete('users/{id}', 'UserController@delete')->name('admin.users.delete');
+        Route::put('users/{id}/edit', 'UserController@edit')->name('admin.users.edit');
+        Route::put('users/{id}', 'UserController@update')->name('admin.users.update');
+        Route::get('users/{id}', 'UserController@show')->name('admin.users.show');
+    });
