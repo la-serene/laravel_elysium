@@ -8,18 +8,19 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Product List</h3>
+
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th data-orderable="false">Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                                 <th>Sold</th>
-                                <th>Discount</th>
+                                <th data-orderable="false">Category</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th data-orderable="false">Options</th>
@@ -29,12 +30,24 @@
                         <tbody>
                             @foreach($products as $product)
                             <tr>
-                                <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->id }}</a></td>
+                                <td><a href="{{ route('admin.products.show', $product->id) }}"><img src="{{ asset($product->image) }}" class="product-image" alt="Product Image"></a></td>
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->title }}</a></td>
-                                <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->price }}</a></td>
+                                <td><a href="{{ route('admin.products.show', $product->id) }}">${{ $product->price }} <br> Discount : {{ $product->discount }}% </a></td>
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->total_stock }}</a></td>
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->total_sales }}</a></td>
-                                <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->discount }}</a></td>
+                                <td>
+                                    <a href="{{ route('admin.products.show', $product->id) }}">
+                                    {{ $product->category->title }}
+                                    <br>
+                                    @if ($product && $product->subcategory1)
+                                    {{ $product->subcategory1->title }}
+                                    @endif
+                                    <br>
+                                    @if ($product && $product->subcategory2)
+                                    {{ $product->subcategory2->title }}
+                                    @endif
+                                    </a>
+                                </td>
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->created_at }}</a></td>
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->updated_at }}</a></td>
                                 <td>
@@ -80,6 +93,15 @@
  </div>
 
 @include('admin.layouts.footer')
+<style>
+    .product-image {
+        width: 100px; /* Kích thước chiều rộng mong muốn */
+        height: 100px; /* Kích thước chiều cao mong muốn */
+        object-fit: cover; /* Chỉnh sửa ảnh để vừa với kích thước đã định */
+        display: block;
+    }
+</style>
+
 <!-- DataTables & Plugins -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -171,4 +193,16 @@
         }
     }
 </script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        // Remove the initialization code for example2
+    });
+</script>
+
 

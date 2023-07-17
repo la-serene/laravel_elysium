@@ -15,12 +15,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>District</th>
-                                <th>City</th>
-                                <th>Phone Number</th>
+                                <th data-orderable="false">Name</th>
+                                <th data-orderable="false">Email</th>
+                                <th data-orderable="false">Address</th>
+                                <th data-orderable="false">District</th>
+                                <th data-orderable="false">City</th>
+                                <th data-orderable="false">Phone Number</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                             </tr>
@@ -48,17 +48,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone Number</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.card-body -->

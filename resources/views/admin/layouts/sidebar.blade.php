@@ -39,7 +39,7 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                {{$page_title}}
+                Dashboard
               </p>
             </a>
           </li>

@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\ProductOption;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateProductRequest;
+use Carbon\Carbon;
 
 use App\Models\Product;
 use App\Models\OrderDetail;
@@ -40,7 +40,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $page_title = $product->title;
         $tab_title = $product->title;
-
+        $product_options = ProductOption::where('product_id', $id)->get();
 
         // Check if the product exists
         if (!$product) {
@@ -62,7 +62,7 @@ class ProductController extends Controller
             $users = null;
         }        
         // Pass the product data to the view
-        return view('admin.products.show', ['product' => $product, 'order_details' => $order_details, 'users' => $users, 'averageRating' => $averageRating,'page_title' => $page_title, 'tab_title' => $tab_title]);
+        return view('admin.products.show', ['product' => $product,'product_options' => $product_options, 'order_details' => $order_details, 'users' => $users, 'averageRating' => $averageRating,'page_title' => $page_title, 'tab_title' => $tab_title]);
     }
     
     public function create()
@@ -89,6 +89,7 @@ class ProductController extends Controller
 
     public function createPost(Request $request)
     {
+        
         // Validate the request data
         $request->validate([
             // Add validation rules for other fields if necessary
@@ -98,13 +99,13 @@ class ProductController extends Controller
             'product_sizes.*' => 'exists:sizes,id',
             'stock' => 'required|array',
             'stock.*.*' => 'integer|min:0',
-            'mainImage' => 'required',
-            'mainImage.*.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'mainImg' => 'required',
+            'mainImg.*.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'image' => 'required|array',
             'image.*.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         
-        $mainImage = $request->file('mainImage');
+        $mainImage = $request->file('mainImg');
         $mainImagePath = null;
         if ($mainImage) {
             $fomartedMainImageName = request('productTitle');
@@ -112,7 +113,7 @@ class ProductController extends Controller
             $fomartedMainImageName = preg_replace('/[^a-z0-9]+/', '-', $fomartedMainImageName); // Loại bỏ các ký tự không phải chữ cái và số, thay thế bằng dấu gạch ngang
             $fomartedMainImageName = trim($fomartedMainImageName, '-'); // Loại bỏ dấu gạch ngang từ đầu và cuối chuỗi
 
-            $mainImageName = $$fomartedMainImageName . '_'.'main' . $mainImage->getClientOriginalExtension();
+            $mainImageName = $fomartedMainImageName . '_'.'main'.'.' . $mainImage->getClientOriginalExtension();
             $mainImage->move(public_path('img'), $mainImageName);
             $mainImagePath = 'img/' . $mainImageName;
         }
@@ -126,7 +127,7 @@ class ProductController extends Controller
             'discount' => request('product_discount'),
             'description' => request('productDescription'),
             'image' => $mainImagePath,
-            'created_at' => time()
+            'created_at' => Carbon::now(),
         ];
 
     
@@ -162,7 +163,7 @@ class ProductController extends Controller
                     'color_id' => $color,
                     'size_id' => $size,
                     'image' => $imagePath,
-                    'created_at' => time()
+                    'created_at' => Carbon::now(),
                 ];
             }
         }
@@ -182,6 +183,7 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
+
     public function edit($id)
     {
         $product = Product::find($id);
@@ -196,6 +198,8 @@ class ProductController extends Controller
         $subcategory2s = Subcategory2::all();
         $colors = Color::all();
         $sizes = Size::all();
+        $page_title = 'Edit ' . $product->title;
+        $tab_title = 'Edit ' . $product->title;
 
         // Pass the product data to the view
         return view('admin.products.edit', [
@@ -205,7 +209,9 @@ class ProductController extends Controller
             'subcategory2s' => $subcategory2s,
             'product_options ' => $product_options,
             'colors' => $colors,
-            'sizes' => $sizes,  
+            'sizes' => $sizes, 
+            'page_title' => $page_title,
+            'tab_title' => $tab_title,   
 
         ]);
     }
