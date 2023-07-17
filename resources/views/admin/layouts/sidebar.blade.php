@@ -49,7 +49,6 @@
               <p>
                 Orders
                 <i class="fas fa-angle-left right"></i>
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -62,15 +61,34 @@
               <li class="nav-item">
                 <a href="{{ route('admin.orders.index', ['state' => 'pending']) }}" class="nav-link {{ request()->routeIs('admin.orders.index') && request('state') === 'pending' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>New Orders</p>
+                  <p>Pending Orders</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.orders.create') }}" class="nav-link {{ request()->routeIs('admin.orders.create') ? 'active' : '' }}">
+                <a href="{{ route('admin.orders.index', ['state' => 'confirmed']) }}" class="nav-link {{ request()->routeIs('admin.orders.index') && request('state') === 'confirmed' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add New Order</p>
+                  <p>Confirmed Orders</p>
                 </a>
               </li>
+
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.orders.index', ['state' => 'shipping']) }}" class="nav-link {{ request()->routeIs('admin.orders.index') && request('state') === 'shipping' ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Shipping Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.orders.index', ['state' => 'success']) }}" class="nav-link {{ request()->routeIs('admin.orders.index') && request('state') === 'success' ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Success Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.orders.index', ['state' => 'canceled']) }}" class="nav-link {{ request()->routeIs('admin.orders.index') && request('state') === 'canceled' ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Canceled Orders</p>
+                </a>
             </ul>
           </li>
           <li class="nav-item">
@@ -102,7 +120,6 @@
               <p>
                 User
                 <i class="fas fa-angle-left right"></i>
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -116,29 +133,6 @@
                 <a href="{{ route('admin.users.create') }}" class="nav-link {{ request()->routeIs('admin.users.create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New User</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags"></i>
-              <p>
-                Category management
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View all</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.categories.create') }}" class="nav-link {{ request()->routeIs('admin.categories.create') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add New Category</p>
                 </a>
               </li>
             </ul>

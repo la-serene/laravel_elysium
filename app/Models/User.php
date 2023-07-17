@@ -26,7 +26,7 @@ class User extends Authenticatable
         'date_of_birth',
         'email',
         'password',
-        'city_id'.
+        'city_id',
         'district_id',
         'avatar'
     ];
@@ -46,7 +46,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    protected $carts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

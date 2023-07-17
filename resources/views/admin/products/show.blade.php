@@ -149,8 +149,8 @@
                         <tr>
                         <td>Total </td>
                         <td></td>
-                        <td id="total-stock">{{$product->stock}}</td>
-                        <td id="total-sales">{{$product->sales}}</td>
+                        <td id="total-stock">{{$product->total_stock}}</td>
+                        <td id="total-sales">{{$product->total_sales}}</td>
                         </tr>
                     </tfoot>
                     </table>
@@ -174,8 +174,26 @@
             </nav>
                 <div class="tab-content p-3" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">{{$product->description}}</div>
-                <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> Vivamus rhoncus nisl sed venenatis luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum. </div>
-                <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> Cras ut ipsum ornare, aliquam ipsum non, posuere elit. In hac habitasse platea dictumst. Aenean elementum leo augue, id fermentum risus efficitur vel. Nulla iaculis malesuada scelerisque. Praesent vel ipsum felis. Ut molestie, purus aliquam placerat sollicitudin, mi ligula euismod neque, non bibendum nibh neque et erat. Etiam dignissim aliquam ligula, aliquet feugiat nibh rhoncus ut. Aliquam efficitur lacinia lacinia. Morbi ac molestie lectus, vitae hendrerit nisl. Nullam metus odio, malesuada in vehicula at, consectetur nec justo. Quisque suscipit odio velit, at accumsan urna vestibulum a. Proin dictum, urna ut varius consectetur, sapien justo porta lectus, at mollis nisi orci et nulla. Donec pellentesque tortor vel nisl commodo ullamcorper. Donec varius massa at semper posuere. Integer finibus orci vitae vehicula placerat. </div>
+                <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
+                    @foreach($product->orderDetails as $orderDetail )
+                    <div class="post">
+                        <p>
+                            <a href="{{ route('admin.users.show', $orderDetail->order->user_id) }}">{{$orderDetail->order->user->username}}</a>
+                        </p>
+                        <p>
+                            At : {{$orderDetail->created_at}}
+                        </p>
+                        <p>
+                            Comment :{{$orderDetail->comment}}
+                        </p>
+                        <p>Rating :{{$orderDetail->rating}}
+                        </p>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> 
+                    Total rating : {{$product->averageRating()}} Star
+                </div>
         </div>
     </div>
     <!-- /.card-body -->

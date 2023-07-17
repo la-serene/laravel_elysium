@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Session;
+
+use App\Models\User;
+
 
 class AdminController extends Controller
 {
@@ -14,19 +20,20 @@ class AdminController extends Controller
     {
         return view('admin.pages.login');
     }
-    public function login(Request $request)
+    public function loginPost(Request $request)
     {
-        //dd($request);
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+    
         $credentials = $request->only('email', 'password');
-        dd($credentials);
-        
-        if (Auth::guard('admin')->attempt($credentials)) {
-            // Authentication successful
-            return redirect()->intended('/admin/dashboard');
-        } else {
-            dd($request);
-            //return redirect()->back()->with('error', 'Invalid credentials');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('admin.dashboard')
+                        ->withSuccess('Signed in');
         }
+   
+        return redirect("admin.login")->withSuccess('Login details are not valid');
     }
     
     public function index()

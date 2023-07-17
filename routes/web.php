@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\HandleAjaxController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,6 +17,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+
 
 
 Route::middleware('guest')->group(function () {
@@ -114,55 +114,33 @@ Route::controller(UserController::class)
 
 
 Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
-    // Admin Login Form
-    Route::get('login', 'AdminController@showLoginForm')->name('admin.login');
-    // Admin Login
-    Route::post('login', 'AdminController@loginSubmit')->name('admin.login.submit');
-    // Admin Logout
-    Route::post('logout', 'AdminController@logout')->name('admin.logout');
-
-    Route::prefix('password')->group(function () {
-        // Forgot Password Form
-        Route::get('reset', 'AdminController@showLinkRequestForm')->name('admin.password.request');
-        // Send Password Reset Link
-        Route::post('email', 'AdminController@sendResetLinkEmail')->name('admin.password.email');
-        // Reset Password Form
-        Route::get('reset/{token}', 'AdminController@showResetForm')->name('admin.password.reset');
-        // Reset Password
-        Route::post('reset', 'AdminController@reset')->name('admin.password.update');
-    });
+    
 
     // Admin Dashboard
     Route::get('/',  'AdminController@index')->name('admin.home');
     Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     Route::get('sales', 'AdminController@sales')->name('admin.sales');
-    
-    
-    
-    
+
     // Manage Products
     Route::get('products', 'ProductController@index')->name('admin.products.index');
     Route::get('products/create', 'ProductController@create')->name('admin.products.create');
     Route::post('products/create', 'ProductController@createPost')->name('admin.products.createPost');
     Route::delete('products/{id}', 'ProductController@delete')->name('admin.products.delete');
-    Route::put('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
+    Route::get('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
     Route::put('products/{id}', 'ProductController@update')->name('admin.products.update');
     Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
     Route::post('/admin/products/delete-selected', 'ProductController@deleteSelected')->name('admin.products.deleteSelected');
 
-    
-
-    // Category index route
-    Route::get('categories', 'CategoryController@index')->name('admin.categories.index');
-
-    // Category create route
-    Route::get('categories/create', 'CategoryController@create')->name('admin.categories.create');
 
 
     // Manage Orders
     Route::get('orders', 'OrderController@index')->name('admin.orders.index');
+    //Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
+    //Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
     Route::get('orders/{id}', 'OrderController@show')->name('admin.orders.show');
-    Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
+    
+    Route::put('/orders/{order}/update-state', 'OrderController@updateState')->name('admin.orders.updateState');
+
 
     // Manage Users
     Route::get('users', 'UserController@index')->name('admin.users.index');

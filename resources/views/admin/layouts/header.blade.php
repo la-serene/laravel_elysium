@@ -59,9 +59,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('admin.users.index') }}" class="nav-link">Users</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Settings</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->

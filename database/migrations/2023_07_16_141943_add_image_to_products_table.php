@@ -2,28 +2,29 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class UpdateOrdersTableCalculateTotalPrice extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('image')->nullable();
-        });
-    }
-    
+        // Calculate and update the total_price for existing orders
+        $orders = DB::table('orders')->select('id')->get();
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        foreach ($orders as $order) {
+            $totalPrice = DB::table('order_details')
+                ->where('order_id', $order->id)
+                ->sum('total_price');
+
+            DB::table('orders')
+                ->where('id', $order->id)
+                ->update(['total_price' => $totalPrice]);
+        }
     }
-};
+
+    public function down()
+    {
+        // Rollback is not necessary as this migration only calculates and updates the total_price
+    }
+}

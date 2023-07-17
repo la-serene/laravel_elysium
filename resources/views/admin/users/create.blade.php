@@ -6,8 +6,11 @@
     <div class="container mt-5">
         <h1>Create New User</h1>
         @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
-        <form action="{{ route('admin.users.createPost') }}" method="POST">
+        <form action="{{ route('admin.users.createPost') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
             <div class="form-group">
@@ -66,6 +69,10 @@
                         <option value="{{ $district->id }}">{{ $district->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="inputMainImg">Avatar</label> 
+                <input type="file" name="mainImg" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-primary">Create User</button>

@@ -66,6 +66,57 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Images</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($product->productOptions as $productOption)
+                                <tr>
+                                    <td>
+                                        @if($loop->first && $product->image)
+                                            <img src="{{ asset($product->image) }}" alt="Product Image" style="max-height: 100px;">
+                                        @elseif($productOption->image)
+                                            <img src="{{ asset($productOption->image) }}" alt="Product Option Image" style="max-height: 100px;">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($loop->first && $product->image)
+                                            Main Image
+                                        @elseif($productOption->image)
+                                            {{ $productOption->color->title }} - {{ $productOption->size->title }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($loop->first && $product->image)
+                                            <a href="#">Remove Main Image</a>
+                                        @elseif($productOption->image)
+                                            <a href="#">Remove Image</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
         </div>
 
         <div class="col-md-6">
@@ -91,10 +142,9 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Option</h3>
+                    <h3 class="card-title">Stock</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
@@ -102,41 +152,30 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="colorMultiSelect">Select color</label>
-                        <select class="select2" multiple="multiple" name="product_colors[]" data-placeholder="Any" style="width: 100%;" >
-                            <select name="color_id[]">
-                                @foreach($colors as $color)
-                                    <option value="{{ $color->id }}">
-                                        {{ $color->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="colorMultiSize">Size</label>
-                        <select class="select2" multiple="multiple" name="product_sizes[]" data-placeholder="Any" style="width: 100%;">
-
-                        </select>
-                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Color</th>
+                                <th>Size</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($product->productOptions as $productOption)
+                            <tr>
+                                <td>{{ $productOption->color->title }}</td>
+                                <td>{{ $productOption->size->title }}</td>
+                                <td>
+                                    <input type="number" name="stock[{{ $productOption->id }}]" class="form-control" value="{{ $productOption->stock }}">
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.card-body -->
             </div>
-            <div id="stockTableContainer">
-                <table id="stockTable" class="table">
-                    <thead>
-                        <tr>
-                            <th>Color</th>
-                            <th>Size</th>
-                            <th>Stock</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Stock rows will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
+            
         </div>
     </div>
 
@@ -216,27 +255,37 @@
         }
     });
 </script>
-
 <script>
-    $(document).ready(function() {
-        $('.select2').on('change', function() {
-            var selectedColors = $('[name="product_colors[]"]').val();
-            var selectedSizes = $('[name="product_sizes[]"]').val();
+    // Function to filter rows based on color and size selection
+    function filterRows() {
+        var selectedColor = document.getElementById("color-filter").value;
+        var selectedSize = document.getElementById("size-filter").value;
+        var totalStock = 0;
+        var totalSales = 0;
 
-            if (selectedColors && selectedColors.length > 0 && selectedSizes && selectedSizes.length > 0) {
-                $('#stockTable tbody').empty();
+        var rows = document.querySelectorAll("tbody tr");
+        rows.forEach(function(row) {
+            var color = row.querySelector("td:nth-child(1)").textContent.trim();
+            var size = row.querySelector("td:nth-child(2)").textContent.trim();
+            var stock = parseInt(row.querySelector("td:nth-child(3)").textContent);
+            var sales = parseInt(row.querySelector("td:nth-child(4)").textContent);
 
-                for (var i = 0; i < selectedColors.length; i++) {
-                    for (var j = 0; j < selectedSizes.length; j++) {
-                        var stockRow = $('<tr>');
-                        stockRow.append('<td>' + selectedColors[i] + '</td>');
-                        stockRow.append('<td>' + selectedSizes[j] + '</td>');
-                        stockRow.append('<td><input type="number" name="stock[' + selectedColors[i] + '][' + selectedSizes[j] + ']" min="0" class="form-control"></td>');
-
-                        $('#stockTable tbody').append(stockRow);
-                    }
-                }
+            if ((selectedColor === "" || color === selectedColor) && (selectedSize === "" || size === selectedSize)) {
+                row.style.display = "";
+                totalStock += stock;
+                totalSales += sales;
+            } else {
+                row.style.display = "none";
             }
         });
-    });
+
+        document.getElementById("total-stock").textContent = totalStock;
+        document.getElementById("total-sales").textContent = totalSales;
+    }
+
+    // Event listeners for color and size filter changes
+    document.getElementById("color-filter").addEventListener("change", filterRows);
+    document.getElementById("size-filter").addEventListener("change", filterRows);
 </script>
+
+

@@ -14,28 +14,28 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>User</th>
+                                <th data-orderable="false">ID</th>
+                                <th data-orderable="false">User</th>
                                 <th>Total Price</th>
-                                <th>Address</th>
-                                <th>District</th>
-                                <th>City</th>
-                                <th>Created At</th>
+                                <th data-orderable="false">Address</th>
+                                <th data-orderable="false" >District</th>
+                                <th data-orderable="false">City</th>
+                                <th >Created At</th>
                                 <th>Updated At</th>
-                                <th>State</th>
+                                <th data-orderable="false">State</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
                             <tr>
                                 <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->id }}</a></td>
-                                <td>{{ $order->user->name }}</td>
-                                <td>{{ $order->total_price }}</td>
-                                <td>{{ $order->address }}</td>
-                                <td>{{ $order->district->name }}</td>
-                                <td>{{ $order->city->name }}</td>
-                                <td>{{ $order->created_at }}</td>
-                                <td>{{ $order->updated_at }}</td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->user->username }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->total_price }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->address }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->district->name }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->city->name }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->created_at }}</a></td>
+                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->updated_at }}</a></td>
                                 <td>
                                     @if($order->state === 'pending')
                                         <button class="btn btn-primary">{{ $order->state }}</button>
@@ -52,7 +52,6 @@
                             </tr>
                             @endforeach
                         </tbody>
->
                     </table>
                 </div>
                 <!-- /.card-body -->
