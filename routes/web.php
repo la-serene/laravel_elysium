@@ -53,10 +53,12 @@ Route::prefix('admin')
     ->namespace('App\Http\Controllers\Admin')
     ->group(function () {
 
+
         // Admin Dashboard
         Route::get('/', 'AdminController@index')->name('admin.home');
         Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
         Route::get('/sales', 'AdminController@sales')->name('admin.sales');
+
 
         // Manage Products
         Route::get('products', 'ProductController@index')->name('admin.products.index');
@@ -66,8 +68,7 @@ Route::prefix('admin')
         Route::get('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
         Route::put('products/{id}', 'ProductController@update')->name('admin.products.update');
         Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
-        Route::post('/admin/products/delete-selected',
-            'ProductController@deleteSelected')->name('admin.products.deleteSelected');
+        Route::post('/admin/products/delete-selected', 'ProductController@deleteSelected')->name('admin.products.deleteSelected');
 
 
         // Manage Orders
@@ -75,7 +76,6 @@ Route::prefix('admin')
         Route::get('orders/create', 'OrderController@create')->name('admin.orders.create');
         Route::post('orders/create', 'OrderController@creatPost')->name('admin.orders.createPost');
         Route::get('orders/{id}', 'OrderController@show')->name('admin.orders.show');
-
         Route::put('/orders/{order}/update-state', 'OrderController@updateState')->name('admin.orders.updateState');
 
 
