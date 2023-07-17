@@ -1,40 +1,31 @@
-@extends('auth.layout')
-@section('content')
-    <form action="{{ route('authenticate') }}" method="POST">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @csrf
-        <h3>LOGIN</h3>
-        <div class="form-wrapper">
-            <label>
-                <input type="text" placeholder="Email Address" class="form-control" name="email">
-            </label>
-            <i class="zmdi zmdi-email"></i>
-        </div>
-
-        <div class="form-wrapper">
-            <label>
-                <input type="password" placeholder="Password" class="form-control" name="password">
-            </label>
-            <i class="zmdi zmdi-lock"></i>
-        </div>
-        <a href="forget.html" class="forget-password">
-            Forget password?
-            <i class="zmdi zmdi-arrow-right"></i>
-        </a>
-
-        <button>Login
-            <i class="zmdi zmdi-arrow-right"></i>
-        </button>
-        <a href="{{ route('register') }}" style="color: gray; padding-top: 20px ; padding-left: 5px;">
-            You don't have an account? Register now!
-        </a>
-    </form>
-@endsection
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ $title }}</title>
+</head>
+<body>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form action="{{ route('authenticate') }}" method="POST">
+    @csrf
+    Email
+    <br>
+    <input type="text" name="email">
+    Password
+    <br>
+    <input type="password" name="password">
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
