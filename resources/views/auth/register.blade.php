@@ -1,6 +1,15 @@
 @extends('auth.layout')
 @section('content')
     <form action="{{ route('store') }}" method="POST">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @csrf
         <h3>Registration Form</h3>
         <div class="form-group">
