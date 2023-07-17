@@ -26,6 +26,13 @@ Route::controller(LoginController::class)
         Route::get('/', 'welcome')->name('welcome');
     });
 
+Route::controller(LoginController::class)
+    ->prefix('/password')
+    ->name('password.')
+    ->group(function () {
+       Route::post('/forget', 'forget_password')->name('forget');
+    });
+
 Route::controller(UserController::class)
     ->prefix('/user')
     ->name('user.')
