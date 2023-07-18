@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(int $category_id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('product.product_list', [
             'title' => "Shopping",
+            'category_id' => $category_id,
         ]);
     }
 

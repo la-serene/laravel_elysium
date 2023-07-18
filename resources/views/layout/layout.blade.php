@@ -1,3 +1,7 @@
+@php
+    use App\Models\Product;
+    $products = Product::all();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,16 +232,12 @@
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            Lightweight Jacket
                         </h4>
 
                         <span class="mtext-106 cl2">
-								$58.79
 							</span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-                            feugiat.
                         </p>
 
                         <!--  -->

@@ -40,7 +40,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $page_title = $product->title;
         $tab_title = $product->title;
-        $product_options = ProductOption::where('product_id', $id)->get();
+        $product_options = ProductOption::where('id', $id)->get();
 
         // Check if the product exists
         if (!$product) {
@@ -49,8 +49,8 @@ class ProductController extends Controller
         }
         if(!$product->orderDetails()){
             $averageRating = $product->orderDetails()->avg('rating');
-            $order_details = OrderDetail::where('product_id', $id)->first();
-            $order_ids = OrderDetail::where('product_id', $id)->first('order_id');
+            $order_details = OrderDetail::where('id', $id)->first();
+            $order_ids = OrderDetail::where('id', $id)->first('order_id');
             $user_ids = Order::where('id', $order_ids)->first('user_id');
             $users = User::find($user_ids);
         }
@@ -157,7 +157,7 @@ class ProductController extends Controller
                 }
 
                 $productOptionsData[] = [
-                    'product_id' => $product->id,
+                    'id' => $product->id,
                     'stock' => $stock,
                     'sales' => 0,
                     'color_id' => $color,
@@ -187,7 +187,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $product_options = ProductOption::where('product_id', $id)->get();
+        $product_options = ProductOption::where('id', $id)->get();
 
         if (!$product) {
             // Handle the case when the product does not exist
@@ -198,8 +198,8 @@ class ProductController extends Controller
         $subcategory2s = Subcategory2::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $page_title = 'Edit ' . $product->title;
-        $tab_title = 'Edit ' . $product->title;
+        $page_title = 'Edit ' . $product->product_name;
+        $tab_title = 'Edit ' . $product->product_name;
 
         // Pass the product data to the view
         return view('admin.products.edit', [

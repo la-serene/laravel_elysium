@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('total_stock')->default(0);
             $table->integer('discount')->nullable();
             $table->string('description')->nullable();
+            $table->string('image')->default("https://www.google.com/url?sa=i&url=https%3A%2F%2Fbattle-cats.fandom.com%2Ff%2Fp%2F4400000000000819492&psig=AOvVaw02DfXmEDXJjhOHCj7yZE70&ust=1689734062218000&source=images&cd=vfe&opi=89978449&ved=0CA0QjRxqFwoTCLiahIacl4ADFQAAAAAdAAAAABAE");
             $table->timestamps();
         });
     }

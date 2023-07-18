@@ -41,7 +41,7 @@
         </li>
 
         <li>
-            <a href="{{ route("product.index") }}">Shop</a>
+            <a href="{{ route("product.index", ['category_id' => 1]) }}">Shop</a>
         </li>
 
         <li>

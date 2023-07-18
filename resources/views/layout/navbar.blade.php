@@ -14,7 +14,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route("product.index") }}">Shopping</a>
+                    <a href="{{ route("product.index", ['category_id' => 1]) }}">Shopping</a>
                 </li>
 
                 <li class="label1" data-label1="hot">

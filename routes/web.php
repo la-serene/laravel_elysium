@@ -44,7 +44,7 @@ Route::controller(ProductController::class)
     ->prefix('/product')
     ->name('product.')
     ->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/{category_id}', 'index')->name('index');
         Route::get('/{id}', 'show')->name('show');
     });
 
