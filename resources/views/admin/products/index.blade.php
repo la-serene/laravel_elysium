@@ -37,14 +37,14 @@
                                 <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->total_sales }}</a></td>
                                 <td>
                                     <a href="{{ route('admin.products.show', $product->id) }}">
-                                    {{ $product->category->title }}
+                                    {{ $product->category->category_name }}
                                     <br>
                                     @if ($product && $product->subcategory1)
-                                    {{ $product->subcategory1->title }}
+                                    {{ $product->subcategory1->subcategory1_name }}
                                     @endif
                                     <br>
                                     @if ($product && $product->subcategory2)
-                                    {{ $product->subcategory2->title }}
+                                    {{ $product->subcategory2->subcategory2_name }}
                                     @endif
                                     </a>
                                 </td>
@@ -68,7 +68,7 @@
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>Edit
                                             </button>
-                                        </form>  
+                                        </form>
                                     </div>
                                 </td>
                                 <td>
@@ -182,7 +182,7 @@
 <script>
     function confirmDelete(event) {
         event.preventDefault(); // Prevent the form from submitting immediately
-        
+
         // Display the confirmation message with Yes/No options
         if (confirm("Are you sure you want to delete this product?")) {
             // If the user clicks "Yes", submit the form

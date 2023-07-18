@@ -64,7 +64,7 @@ Route::prefix('admin')
         Route::get('products/create', 'ProductController@create')->name('admin.products.create');
         Route::post('products/create', 'ProductController@createPost')->name('admin.products.createPost');
         Route::delete('products/{id}', 'ProductController@delete')->name('admin.products.delete');
-        Route::get('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
+        Route::put('products/{id}/edit', 'ProductController@edit')->name('admin.products.edit');
         Route::put('products/{id}', 'ProductController@update')->name('admin.products.update');
         Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
         Route::post('/admin/products/delete-selected', 'ProductController@deleteSelected')->name('admin.products.deleteSelected');
