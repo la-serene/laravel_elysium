@@ -4,33 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->string('product_description')->nullable();
-            #$table->foreign('category_id')->references('id')->on('categories');
-            #$table->foreign('subcategory_id1')->references('id')->on('sub_category1s');
-            #$table->foreign('subcategory_id2')->references('id')->on('sub_category2s');
-            $table->decimal('product_price', 8, 2);
+            $table->string('title');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('subcategory_id1')->nullable();
+            $table->unsignedBigInteger('subcategory_id2')->nullable();
+            $table->decimal('price', 8, 2);
             $table->integer('total_sales')->default(0);
             $table->integer('total_stock')->default(0);
             $table->integer('discount')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('products');
     }
-};
+}

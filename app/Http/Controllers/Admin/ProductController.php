@@ -6,11 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\ProductOption;
 use App\Models\User;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -28,9 +23,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the products.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function index(): Response
+    public function index()
     {
         $products = Product::all();
         $page_title = 'Products';
@@ -39,7 +34,7 @@ class ProductController extends Controller
         return new Response(view('admin.products.index', ['products' => $products, 'page_title' => $page_title, 'tab_title' => $tab_title]));
     }
 
-    public function show($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function show($id)
     {
 
         $product = Product::find($id);
@@ -70,7 +65,7 @@ class ProductController extends Controller
         return view('admin.products.show', ['product' => $product,'product_options' => $product_options, 'order_details' => $order_details, 'users' => $users, 'averageRating' => $averageRating,'page_title' => $page_title, 'tab_title' => $tab_title]);
     }
 
-    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function create()
     {
         $categories = Category::all();
         $subcategory1s = Subcategory1::all();
@@ -92,7 +87,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function createPost(Request $request): RedirectResponse
+    public function createPost(Request $request)
     {
 
         // Validate the request data
@@ -179,7 +174,7 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function delete($id): RedirectResponse
+    public function delete($id)
     {
         $product = Product::findOrFail($id);
         $product->orderDetails()->delete();
@@ -189,7 +184,7 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
 
-    public function edit($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function edit($id)
     {
         $product = Product::find($id);
         $product_options = ProductOption::where('product_id', $id)->get();
@@ -220,7 +215,7 @@ class ProductController extends Controller
 
         ]);
     }
-    public function update($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function update($id)
     {
         $product = Product::find($id);
 
@@ -232,7 +227,7 @@ class ProductController extends Controller
         // Pass the product data to the view
         return view('admin.products.edit', ['product' => $product]);
     }
-    public function deleteSelected(Request $request): JsonResponse
+    public function deleteSelected(Request $request)
     {
         $selectedProductIds = $request->input('selected_products');
 
@@ -246,3 +241,4 @@ class ProductController extends Controller
 
 
 }
+
