@@ -1,3 +1,4 @@
+
 @extends('auth.layout')
 @section('content')
     <form action="{{ route('store') }}" method="POST">
@@ -65,3 +66,5 @@
         </button>
     </form>
 @endsection
+
+
